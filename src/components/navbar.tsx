@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { signout } from "@/app/auth/actions";
+import MobileNav from "./mobile-nav";
 
 const categories = [
   { name: "General", slug: "general-discussion" },
@@ -30,6 +31,7 @@ export default async function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
         <div className="flex items-center gap-6">
+          <MobileNav user={profile} />
           <Link href="/" className="text-lg font-bold text-blue-600">
             Freediving Forum
           </Link>
