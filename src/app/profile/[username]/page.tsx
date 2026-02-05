@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import PostCard from "@/components/post-card";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -44,9 +45,11 @@ export default async function ProfilePage({ params }: Props) {
     <div className="space-y-6">
       <div className="flex items-center gap-4">
         {profile.avatar_url && (
-          <img
+          <Image
             src={profile.avatar_url}
             alt={profile.username}
+            width={64}
+            height={64}
             className="h-16 w-16 rounded-full"
           />
         )}
