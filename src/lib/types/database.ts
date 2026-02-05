@@ -31,6 +31,7 @@ export interface Database {
           description?: string;
           sort_order?: number;
         };
+        Relationships: [];
       };
       users: {
         Row: {
@@ -57,6 +58,7 @@ export interface Database {
           is_admin?: boolean;
           created_at?: string;
         };
+        Relationships: [];
       };
       posts: {
         Row: {
@@ -89,6 +91,22 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "posts_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "posts_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       replies: {
         Row: {
@@ -115,6 +133,22 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "replies_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "replies_post_id_fkey";
+            columns: ["post_id"];
+            isOneToOne: false;
+            referencedRelation: "posts";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       reports: {
         Row: {
@@ -141,6 +175,29 @@ export interface Database {
           reason?: string;
           created_at?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: "reports_reporter_id_fkey";
+            columns: ["reporter_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "reports_post_id_fkey";
+            columns: ["post_id"];
+            isOneToOne: false;
+            referencedRelation: "posts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "reports_reply_id_fkey";
+            columns: ["reply_id"];
+            isOneToOne: false;
+            referencedRelation: "replies";
+            referencedColumns: ["id"];
+          },
+        ];
       };
     };
     Views: {
@@ -150,6 +207,9 @@ export interface Database {
       [_ in never]: never;
     };
     Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
       [_ in never]: never;
     };
   };
