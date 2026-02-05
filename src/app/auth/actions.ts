@@ -11,25 +11,16 @@ export async function signup(formData: FormData) {
   const password = formData.get("password") as string;
   const username = formData.get("username") as string;
 
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      data: { username },
+    },
   });
 
   if (error) {
     redirect(`/auth/signup?error=${encodeURIComponent(error.message)}`);
-  }
-
-  if (data.user) {
-    const { error: profileError } = await supabase
-      .from("users")
-      .insert({ id: data.user.id, username });
-
-    if (profileError) {
-      redirect(
-        `/auth/signup?error=${encodeURIComponent(profileError.message)}`
-      );
-    }
   }
 
   revalidatePath("/", "layout");
