@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import PostCard from "@/components/post-card";
+import RealtimePosts from "@/components/realtime-posts";
 import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
 
@@ -48,6 +49,7 @@ export default async function Home({
 
   return (
     <div className="space-y-6">
+      <RealtimePosts />
       {/* Category filter pills */}
       <div className="flex flex-wrap gap-2">
         <Link

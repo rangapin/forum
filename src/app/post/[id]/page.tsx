@@ -4,6 +4,7 @@ import { getCategoryBySlug } from "@/lib/categories";
 import MarkdownBody from "@/components/markdown-body";
 import ReplyList from "@/components/reply-list";
 import ReplyForm from "@/components/reply-form";
+import RealtimeReplies from "@/components/realtime-replies";
 import ReportButton from "@/components/report-button";
 import DeleteButton from "@/components/delete-button";
 import Link from "next/link";
@@ -122,6 +123,7 @@ export default async function PostPage({ params }: Props) {
       </div>
 
       {/* Replies */}
+      <RealtimeReplies postId={id} />
       <div className="space-y-4">
         <h2 className="text-lg font-semibold">
           {post.reply_count} {post.reply_count === 1 ? "Reply" : "Replies"}

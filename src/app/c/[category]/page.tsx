@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import PostCard from "@/components/post-card";
+import RealtimePosts from "@/components/realtime-posts";
 import { getCategoryBySlug } from "@/lib/categories";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -57,6 +58,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
 
   return (
     <div className="space-y-6">
+      <RealtimePosts />
       <div>
         <h1 className="text-2xl font-bold">{category.name}</h1>
         <p className="mt-1 text-sm text-gray-500">{category.description}</p>
